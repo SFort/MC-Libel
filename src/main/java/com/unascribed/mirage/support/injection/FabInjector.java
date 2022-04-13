@@ -75,8 +75,8 @@ public class FabInjector {
 			String mixin = null;
 			for(AnnotationNode annotationNode : methodNode.visibleAnnotations){
 				if ((
-						"Lcom/unascribed/fabrication/support/injection/ModifyReturn;".equals(annotationNode.desc)
-						|| "Lcom/unascribed/fabrication/support/injection/Hijack;".equals(annotationNode.desc)
+						"Lcom/unascribed/mirage/support/injection/ModifyReturn;".equals(annotationNode.desc)
+						|| "Lcom/unascribed/mirage/support/injection/Hijack;".equals(annotationNode.desc)
 					) &&dejavu.add(targetClass.name+methodNode.name+methodNode.desc)
 				) {
 					inject = annotationNode;
@@ -163,7 +163,7 @@ public class FabInjector {
 		InsnList oldVars = new InsnList();
 		InsnList newVars = new InsnList();
 		//TODO probably never. continue the variable trace after the first method to further reduce allocation
-		if ("Lcom/unascribed/fabrication/support/injection/ModifyReturn;".equals(toInject.annotation)) {
+		if ("Lcom/unascribed/mirage/support/injection/ModifyReturn;".equals(toInject.annotation)) {
 			if (--countDesc > 0) {
 				AbstractInsnNode varTrace = insn.getPrevious();
 				boolean isSeqVar = varTrace != null && isVariableLoader(varTrace.getOpcode());
@@ -211,7 +211,7 @@ public class FabInjector {
 			mod.add(new MethodInsnNode(toInjectIsStatic ? Opcodes.INVOKESTATIC : Opcodes.INVOKEVIRTUAL, toInject.owner, toInject.name, toInject.desc, false));
 			methodNode.instructions.insert(insn, mod);
 			return true;
-		} else if ("Lcom/unascribed/fabrication/support/injection/Hijack;".equals(toInject.annotation)) {
+		} else if ("Lcom/unascribed/mirage/support/injection/Hijack;".equals(toInject.annotation)) {
 			for (int c = 0; c < argTypes.size(); c++) {
 				methodNode.instructions.insertBefore(insn, new VarInsnNode(getStoreOpcode(argTypes.get(argTypes.size() - 1 - c).getSort()), max++));
 			}

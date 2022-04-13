@@ -27,7 +27,12 @@ public final class Agnos {
 	}
 
 	public static boolean isModLoaded(String modid) {
-		return Loader.isModLoaded(modid);
+		try {
+			return Loader.isModLoaded(modid);
+		}catch (Exception ignore) {
+			//isModLoaded throws null pointer if loaded too early
+			return false;
+		}
 	}
 
 	public static String getModVersion() {

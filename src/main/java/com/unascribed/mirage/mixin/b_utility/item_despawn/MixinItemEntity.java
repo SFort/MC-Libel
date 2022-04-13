@@ -40,7 +40,7 @@ public abstract class MixinItemEntity extends Entity implements SetFromPlayerDea
 	private boolean fabrication$fromPlayerDeath;
 
 	@Shadow
-	private UUID thrower;
+	private String thrower;
 
 	@Shadow
 	public abstract ItemStack getItem();

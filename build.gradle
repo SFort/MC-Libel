@@ -52,10 +52,12 @@ minecraft {
 			workingDirectory project.file('run')
 			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 			property 'forge.logging.console.level', 'debug'
+			property 'fml.coreMods.load', 'com.unascribed.mirage.MirageCoreMod'
 		}
 		server {
 			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 			property 'forge.logging.console.level', 'debug'
+			property 'fml.coreMods.load', 'com.unascribed.mirage.MirageCoreMod'
 		}
 	}
 	accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -84,11 +86,18 @@ tasks.withType(JavaCompile) {
 jar {
 	manifest {
 		attributes([
+				"FMLCorePlugin": "com.unascribed.mirage.MirageCoreMod",
+				"FMLCorePluginContainsFMLMod": "false",
+				"ForceLoadAsMod": "true",
+				"TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+				"TweakOrder": "0",
 				"Specification-Title": "mirage",
 				"Specification-Version": "1",
 				"Implementation-Title": project.name,
 				"Implementation-Version": "${version}",
-				"MixinConnector": "com.unascribed.mirage.MirageMixinConnector"
+				"MixinConnector": "com.unascribed.mirage.MirageMixinConnector",
+				"MixinConfigs": "mirage.refmap.json"
+
 		])
 	}
 

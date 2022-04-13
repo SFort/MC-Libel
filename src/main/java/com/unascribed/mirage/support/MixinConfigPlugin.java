@@ -52,10 +52,9 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
 	@Override
 	public void onLoad(String mixinPackage) {
 		FabConf.reload();
-		FabricationMod.loadFeatures();
-		Mixins.registerErrorHandlerClass("com.unascribed.fabrication.support.MixinErrorHandler_THIS_ERROR_HANDLER_IS_FOR_SOFT_FAILURE_IN_FABRICATION_ITSELF_AND_DOES_NOT_IMPLY_FABRICATION_IS_RESPONSIBLE_FOR_THE_BELOW_ERROR");
-		FabLog.warn("Fabrication is about to inject into Mixin to add support for failsoft mixins.");
-		FabLog.warn("THE FOLLOWING WARNINGS ARE NOT AN ERROR AND DO NOT IMPLY FABRICATION IS RESPONSIBLE FOR A CRASH.");
+		Mixins.registerErrorHandlerClass("com.unascribed.mirage.support.MixinErrorHandler_THIS_ERROR_HANDLER_IS_FOR_SOFT_FAILURE_IN_FABRICATION_ITSELF_AND_DOES_NOT_IMPLY_FABRICATION_IS_RESPONSIBLE_FOR_THE_BELOW_ERROR");
+		FabLog.warn("Mirage is about to inject into Mixin to add support for failsoft mixins.");
+		FabLog.warn("THE FOLLOWING WARNINGS ARE NOT AN ERROR AND DO NOT IMPLY MIRAGE IS RESPONSIBLE FOR A CRASH.");
 		InjectionInfo.register(FailsoftCallbackInjectionInfo.class);
 		InjectionInfo.register(FailsoftModifyArgInjectionInfo.class);
 		InjectionInfo.register(FailsoftModifyArgsInjectionInfo.class);
@@ -83,7 +82,7 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
 	@Override
 	public List<String> getMixins() {
 		FabLog.debug("☕ Profile: "+FabConf.getProfileName().toLowerCase(Locale.ROOT));
-		return discoverClassesInPackage("com.unascribed.fabrication.mixin", true);
+		return discoverClassesInPackage("com.unascribed.mirage.mixin", true);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -111,7 +110,7 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
 				boolean anyRestrictions = false;
 				if (cn.visibleAnnotations != null) {
 					for (AnnotationNode an : cn.visibleAnnotations) {
-						if (an.desc.equals("Lcom/unascribed/fabrication/support/EligibleIf;")) {
+						if (an.desc.equals("Lcom/unascribed/mirage/support/EligibleIf;")) {
 							if (an.values == null) continue;
 							for (int i = 0; i < an.values.size(); i += 2) {
 								anyRestrictions = true;
@@ -133,7 +132,7 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
 									configKeysForDiscoveredClasses.put(ci.getName(), (String)v);
 								} else if (k.equals("envMatches")) {
 									String[] arr = (String[])v;
-									if (arr[0].equals("Lcom/unascribed/fabrication/support/Env;")) {
+									if (arr[0].equals("Lcom/unascribed/mirage/support/Env;")) {
 										Env e = Env.valueOf(arr[1]);
 										if (!e.matches(FabricationMod.isClient)) {
 											eligibilityFailures.add("Environment is incorrect (want "+e.name().toLowerCase(Locale.ROOT)+", isClient: "+FabricationMod.isClient+")");
@@ -207,7 +206,7 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
 										eligibilityNotes.add("Special conditions is present but empty - ignoring");
 									} else {
 										for (String[] e : li) {
-											if (!"Lcom/unascribed/fabrication/support/SpecialEligibility;".equals(e[0])) {
+											if (!"Lcom/unascribed/mirage/support/SpecialEligibility;".equals(e[0])) {
 												eligibilityNotes.add("Unknown special condition type "+e[0]+" - ignoring");
 											} else {
 												try {
@@ -295,7 +294,7 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
 	public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
 		if (FabConf.limitRuntimeConfigs()) finalizeIsEnabled(targetClass);
 		FabInjector.apply(targetClass);
-		if(Agnos.isModLoaded("lithium") && "com.unascribed.fabrication.mixin.e_mechanics.colorful_redstone.MixinRedstoneWireBlock".equals(mixinClassName)) {
+		if(Agnos.isModLoaded("lithium") && "com.unascribed.mirage.mixin.e_mechanics.colorful_redstone.MixinRedstoneWireBlock".equals(mixinClassName)) {
 			targetClass.methods.forEach(methodNode -> {
 				if (methodNode instanceof MethodNodeEx && "getReceivedPowerFaster".equals(((MethodNodeEx) methodNode).getOriginalName())){
 					methodNode.visibleAnnotations.forEach(annotationNode -> {

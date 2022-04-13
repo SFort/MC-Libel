@@ -100,7 +100,7 @@ public class FabConf {
 	private static Profile worldProfile;
 	private static Profile profile;
 	private static QDIni rawConfig;
-	private static Map<String, ConfigValue> config;
+	private static Map<String, ConfigValue> config = new HashMap<>();
 	private static boolean analyticsSafe = false;
 	private static ImmutableMap<String, Boolean> defaults;
 	private static Path worldPath = null;
@@ -139,7 +139,7 @@ public class FabConf {
 					}
 				}
 				if (badKeys) {
-					notices.add("Consider updating this config file by renaming it to fabrication.ini.old");
+					notices.add("Consider updating this config file by renaming it to mirage.ini.old");
 				}
 				if (notices.isEmpty()) {
 					return NOTICES_HEADER+"\r\n; - No notices. You're in the clear!";
@@ -290,7 +290,7 @@ public class FabConf {
 			dummyFrame.setIconImage(Toolkit.getDefaultToolkit().createImage(FabConf.class.getClassLoader().getResource("assets/mirage/icon.png")));
 			dummyFrame.setSize(1, 1);
 			dummyFrame.setLocationRelativeTo(null);
-			JOptionPane.showOptionDialog(dummyFrame, msg, "Fabrication Dev Error",
+			JOptionPane.showOptionDialog(dummyFrame, msg, "Mirage Dev Error",
 					JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE,
 					null,
 					new String[] {"Exit"}, "Exit");
@@ -457,11 +457,11 @@ public class FabConf {
 			FabLog.error("worldSet was called while path was null");
 			return;
 		}
-		set(configKey, newValue, worldPath.resolve("fabrication").resolve("features.ini"), true);
+		set(configKey, newValue, worldPath.resolve("mirage").resolve("features.ini"), true);
 	}
 
 	public static void set(String configKey, String newValue) {
-		set(configKey, newValue, FabricationMod.confPath.toPath().resolve("fabrication").resolve("features.ini"), false);
+		set(configKey, newValue, FabricationMod.confPath.toPath().resolve("mirage").resolve("features.ini"), false);
 	}
 
 	private static void write(String configKey, String newValue, Path configFile){
@@ -518,11 +518,11 @@ public class FabConf {
 
 	public static void reload() {
 		FabLog.info("Reloading configs...");
-		Path dir = FabricationMod.confPath.toPath().resolve("fabrication");
+		Path dir = FabricationMod.confPath.toPath().resolve("mirage");
 		try {
 			Files.createDirectories(dir);
 		} catch (IOException e1) {
-			throw new RuntimeException("Failed to create fabrication config directory", e1);
+			throw new RuntimeException("Failed to create mirage config directory", e1);
 		}
 		Path configFile = dir.resolve("features.ini");
 		checkForAndSaveDefaultsOrUpgrade(configFile, "default_features_config.ini");
@@ -564,11 +564,11 @@ public class FabConf {
 
 	public static void worldReload() {
 		if (worldPath == null) return;
-		Path dir = worldPath.resolve("fabrication");
+		Path dir = worldPath.resolve("mirage");
 		try {
 			Files.createDirectories(dir);
 		} catch (IOException e1) {
-			throw new RuntimeException("Failed to create fabrication world config directory", e1);
+			throw new RuntimeException("Failed to create mirage world config directory", e1);
 		}
 		Path configFile = dir.resolve("features.ini");
 		checkForAndSaveDefaultsOrUpgrade(configFile, "default_features_config.ini", IniTransformer.simpleValueIniTransformer(((key, value) -> "general.profile".equals(key)? "green" : value)));
@@ -606,7 +606,7 @@ public class FabConf {
 
 	private static void load(ConfigLoader ldr) {
 		String name = ldr.getConfigName();
-		Path dir = FabricationMod.confPath.toPath().resolve("fabrication");
+		Path dir = FabricationMod.confPath.toPath().resolve("mirage");
 		Path file = dir.resolve(name+".ini");
 		checkForAndSaveDefaultsOrUpgrade(file, "default_"+name+"_config.ini");
 		FabLog.timeAndCountWarnings("Loading of "+name+".ini", () -> {
@@ -627,7 +627,7 @@ public class FabConf {
 	}
 	private static void checkForAndSaveDefaultsOrUpgrade(Path configFile, String defaultName, IniTransformer transformer) {
 		if (!Files.exists(configFile)) {
-			Path configFileLegacy = configFile.getParent().getParent().resolve(defaultName.equals("default_features_config.ini") ? "fabrication.ini" : "fabrication_"+configFile.getFileName().toString());
+			Path configFileLegacy = configFile.getParent().getParent().resolve(defaultName.equals("default_features_config.ini") ? "mirage.ini" : "mirage_"+configFile.getFileName().toString());
 			boolean migrated = false;
 			if (Files.exists(configFileLegacy)) {
 				try {

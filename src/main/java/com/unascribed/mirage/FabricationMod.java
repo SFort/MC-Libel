@@ -38,7 +38,7 @@ public class FabricationMod {
 	private static final Map<String, Feature> features = Maps.newHashMap();
 	private static final List<Feature> unconfigurableFeatures = Lists.newArrayList();
 	private static final Set<String> enabledFeatures = Sets.newHashSet();
-	public static File confPath = Loader.instance().getConfigDir();
+	public static File confPath = new File("config");
 	public static boolean isClient;
 
 	public static final long LAUNCH_ID = ThreadLocalRandom.current().nextLong();
@@ -55,26 +55,16 @@ public class FabricationMod {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		confPath = event.getModConfigurationDirectory();
 		FabLog.log = event.getModLog();
 	}
 	@Mod.EventHandler
 	public void init(FMLPostInitializationEvent event) {
-
-	}
-	public static void loadFeatures(){
 		if (isClient) {
-			if (FabConf.getValue("*.long_levelup_sound_at_30") != ConfigValue.FALSE) {
-				LEVELUP_LONG = new SoundEvent(new ResourceLocation("fabrication", "levelup_long"));
-			}
-			if (FabConf.getValue("*.oof") != ConfigValue.FALSE) {
-				OOF = new SoundEvent(new ResourceLocation("fabrication", "oof"));
-			}
-			if (FabConf.getValue("*.alt_absorption_sound") != ConfigValue.FALSE) {
-				ABSORPTION_HURT = new SoundEvent(new ResourceLocation("fabrication", "absorption_hurt"));
-			}
+			LEVELUP_LONG = new SoundEvent(new ResourceLocation("mirage", "levelup_long"));
+			OOF = new SoundEvent(new ResourceLocation("mirage", "oof"));
+			ABSORPTION_HURT = new SoundEvent(new ResourceLocation("mirage", "absorption_hurt"));
 		}
-		for (String str : MixinConfigPlugin.discoverClassesInPackage("com.unascribed.fabrication.loaders", false)) {
+		for (String str : MixinConfigPlugin.discoverClassesInPackage("com.unascribed.mirage.loaders", false)) {
 			try {
 				FabConf.introduce((ConfigLoader)Class.forName(str).newInstance());
 			} catch (Exception e) {
@@ -83,7 +73,7 @@ public class FabricationMod {
 		}
 
 		if (Loader.isModLoaded("fscript")) OptionalFScript.reload();
-		for (String s : MixinConfigPlugin.discoverClassesInPackage("com.unascribed.fabrication.features", false)) {
+		for (String s : MixinConfigPlugin.discoverClassesInPackage("com.unascribed.mirage.features", false)) {
 			try {
 				Feature r = (Feature)Class.forName(s).newInstance();
 				String key = FabConf.remap(r.getConfigKey());
@@ -108,6 +98,7 @@ public class FabricationMod {
 			}
 		}
 	}
+
 	public static void featureError(Feature f, Throwable t) {
 		featureError(f.getClass(), f.getConfigKey(), t);
 	}
@@ -150,7 +141,7 @@ public class FabricationMod {
 		}
 	}
 
-	private static final ResourceLocation CONFIG = new ResourceLocation("fabrication", "config");
+	private static final ResourceLocation CONFIG = new ResourceLocation("mirage", "config");
 
 	public static void sendConfigUpdate(MinecraftServer server, String key, EntityPlayerMP spe) {
 		if ("general.profile".equals(key)) key = null;

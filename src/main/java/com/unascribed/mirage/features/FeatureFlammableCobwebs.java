@@ -9,12 +9,12 @@ public class FeatureFlammableCobwebs implements Feature {
 
 	@Override
 	public void apply() {
-		Blocks.FIRE.setFireInfo(Blocks.FIRE, 60, 100);
+		Blocks.FIRE.setFireInfo(Blocks.WEB, 60, 100);
 	}
 
 	@Override
 	public boolean undo() {
-		Blocks.FIRE.setFireInfo(Blocks.FIRE, 0, 0);
+		Blocks.FIRE.setFireInfo(Blocks.WEB, 0, 0);
 		return true;
 	}
 

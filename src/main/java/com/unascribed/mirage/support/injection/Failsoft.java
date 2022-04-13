@@ -63,7 +63,7 @@ public class Failsoft {
 		boolean needClone = false;
 		for (int i = 0; i < stackTrace.length; i++) {
 			StackTraceElement ste = stackTrace[i];
-			if (ste.getClassName().startsWith("com.unascribed.fabrication.support.injection.")) {
+			if (ste.getClassName().startsWith("com.unascribed.mirage.support.injection.")) {
 				newStackTrace[i] = new StackTraceElement("org.spongepowered.asm.mixin.injection.struct.InjectionInfo", "postInject$failsoft", "gist.github.com/517e2d6d4c6a75303721b7e2e995a9f8", -1);
 				needClone = true;
 			}
@@ -72,7 +72,7 @@ public class Failsoft {
 	}
 	// identical to InjectionInfo::postInject, but with usages of InjectionError replaced
 	public static boolean postInject(InjectionInfo ii, MixinTargetContext mixin, String description, String extraInfo) {
-		if (!mixin.getClassName().startsWith("com.unascribed.fabrication.mixin.")) {
+		if (!mixin.getClassName().startsWith("com.unascribed.mirage.mixin.")) {
 			return true;
 		}
 		int expectedCallbackCount = pluck(InjectionInfo.class, ii, "expectedCallbackCount");
