@@ -6,5 +6,4 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-include 'ap'
 

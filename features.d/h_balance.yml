@@ -9,18 +9,6 @@ balance:
 	desc:
 		Changes to vanilla balance.
 
-balance.faster_obsidian:
-	name: Faster Obsidian
-	since: 1.0
-	sides: server_and_client
-	media: https://unascribed.com/fabrication/faster_obsidian.mp4
-	desc:
-		Makes obsidian and obsidian-related blocks break 3× faster. Needed on both sides to work
-		properly.
-		
-		Does not break vanilla clients when on the server, but when on the client, vanilla servers
-		will think you're cheating. (And they won't be wrong.)
-
 balance.disable_prior_work_penalty:
 	name: Disable Prior Work Penalty
 	since: 1.0

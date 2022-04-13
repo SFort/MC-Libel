@@ -32,35 +32,6 @@ mechanics.slowfall_splash_on_inanimates:
 		
 		This is kind of overpowered.
 
-mechanics.broken_tools_drop_components:
-	name: Broken Gear Drops Components
-	since: 1.1.2
-	sides: server_only
-	media: https://unascribed.com/fabrication/broken_tools_drop_components.mp4
-	link_url: https://github.com/unascribed/Fabrication/blob/trunk/src/main/resources/default_gear_components_config.ini
-	link_text: See the default config for more info
-	desc:
-		Makes gear drop its consituent items when broken. This is completely configurable in
-		config/fabrication/gear_components.ini.
-		
-		Also works with nonplayer entities, where it is affected by their drop chance table.
-
-mechanics.obsidian_tears:
-	name: Obsidian Tears
-	since: 1.2.8
-	sides: server_only_with_client_helper
-	media: https://unascribed.com/fabrication/obsidian_tears.mp4
-	short_desc: Lets you set your spawn at a Crying Obsidian block; automatable
-	desc:
-		Empty bottles can be used to collect "Obsidian Tears" from Crying Obsidian. When quaffed by
-		or dispensed onto a player, it updates their spawn to the location of the block the
-		tears are from. Dispensers can also be used to fill empty bottles with tears.
-		
-		Crying Obsidian respawn works in any dimension and doesn't need to be recharged, but you
-		spawn with half health, no saturation, less than full food, and Weakness.
-		
-		On client, just gives the bottle a custom appearance instead of a potion item.
-
 mechanics.grindstone_disenchanting:
 	name: Grindstone Disenchanting
 	since: 1.2.8

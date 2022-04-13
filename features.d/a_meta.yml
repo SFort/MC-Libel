@@ -35,24 +35,5 @@ block_distribution_analysis:
 		the console; once complete, a TSV (tab-separated value) file will be written to the game
 		directory.
 
-atlas_viewer:
-	name: Atlas Viewer
-	meta: true
-	media: https://unascribed.com/fabrication/atlas_viewer.png
-	desc:
-		The /fabrication:client command (available under Fabric if you have Cotton Client Commands
-		installed - Forge does not support client commands) has an "atlas" subcommand that can be
-		used to view any of the loaded texture atlases. Information on sprites will be shown when
-		hovered.
-		
-		This is an invaluable debugging tool for various kinds of atlas disasters, and was added to
-		debug a sprite overwrite issue with Old Lava.
-
-search:
-	name: Search
-	since: 1.4.0
-	meta: true
-	desc:
-
 # kate: space-indent off
 # vim: noai:noet

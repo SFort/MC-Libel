@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.unascribed.mirage.mixin",
+  "plugin": "com.unascribed.mirage.support.MixinConfigPlugin",
+  "refmap": "mirage.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "injectors": {
+	"defaultRequire": 1
+  },
+  "overwrites": {
+	"conformVisibility": true
+  }
+}

@@ -53,26 +53,6 @@ weird_tweaks.drop_exp_with_keep_inventory:
 		If keepInventory is enabled, players still drop their experience when dying, but do so
 		losslessly. Incents returning to where you died even when keepInventory is enabled.
 
-weird_tweaks.dimensional_tools:
-	name: Dimensional Tools
-	since: 1.2.10
-	sides: server_only_with_client_helper
-	media: https://unascribed.com/fabrication/gold_tools_useful_in_nether.mp4
-	link_url: https://github.com/unascribed/Fabrication/blob/trunk/src/main/resources/default_dimensional_tools_config.ini
-	link_text: See the default config for more info
-	short_desc: Completely configurable dimensional tool bonuses/penalties
-	desc:
-		By default, makes breaking nether blocks deal 50x damage to non-golden and non-netherite
-		tools, and makes golden tools take 1/50th the damage when breaking the same blocks, bringing
-		their durability just above diamond. Also makes wooden tools crafted with nether planks into
-		"Fungal" tools, and stone tools crafted with blackstone into "Blackstone" tools, which also
-		get the 1/50th damage bonus. Completely configurable; see
-		config/fabrication/dimensional_tools.ini.
-		
-		On client, adjusts tooltips to show fractional damage.
-		
-		Inspired by a joke video.
-
 weird_tweaks.instant_pickup:
 	name: Instant Pickup
 	since: 1.3.2

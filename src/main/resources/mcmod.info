@@ -1,0 +1,16 @@
+[
+{
+  "modid": "mirage",
+  "name": "Mirage",
+  "description": "A huge collection of vanilla tweaks and small features..",
+  "version": "3.0",
+  "mcversion": "${mcversion}",
+  "url": "https://unascribed.com/fabrication",
+  "updateUrl": "",
+  "authorList": ["Unascribed", "SFort"],
+  "credits": "",
+  "logoFile": "assets/fabrication/icon.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
