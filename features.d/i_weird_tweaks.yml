@@ -35,24 +35,6 @@ weird_tweaks.disable_equip_sound:
 		
 		On server, prevents the sound from playing at all for everyone.
 
-weird_tweaks.repelling_void:
-	name: Déjà Void
-	since: 1.0
-	sides: server_only
-	media: https://unascribed.com/fabrication/repelling_void.mp4
-	desc:
-		Players falling into the void teleports them back to the last place they were on the ground
-		and deals 6 hearts of unblockable void damage.
-
-weird_tweaks.drop_exp_with_keep_inventory:
-	name: Drop Experience With keepInventory
-	since: 1.2.1
-	sides: server_only
-	media: https://unascribed.com/fabrication/drop_exp_with_keepinventory.mp4
-	desc:
-		If keepInventory is enabled, players still drop their experience when dying, but do so
-		losslessly. Incents returning to where you died even when keepInventory is enabled.
-
 weird_tweaks.instant_pickup:
 	name: Instant Pickup
 	since: 1.3.2
@@ -91,23 +73,6 @@ weird_tweaks.use_items_while_riding:
 	sides: client_only
 	desc:
 		Allows players to use items and attack while riding entities like boats.
-
-weird_tweaks.disable_nether_fog:
-	name: Disable Nether Fog
-	since: 1.4.0
-	sides: client_only
-	media: https://unascribed.com/fabrication/disable_nether_fog.mp4
-	desc:
-		Removes thick nether fog.
-
-weird_tweaks.leaves_grow_grass:
-	name: Leaves Grow Grass
-	since: 1.4.0
-	sides: server_only
-	desc:
-		Grass and tall grass can be placed on leaves.
-
-		Using Bone Meal on leaves makes them grow grass.
 
 weird_tweaks.chaining_creepers:
 	name: Chaining Creepers
