@@ -30,7 +30,8 @@ utility.taggable_players:
 	needs: events
 	short_desc: Allows assigning various "tags" to players, such as no_hunger or invisible_to_mobs
 	desc:
-		Allows you to assign or unassign various "tags" from players via /fabrication tag.
+		Would normally allow you to assign or unassign various "tags" from players via /fabrication tag.
+		But sfort(me) doesn't understand forge events so you'll have to edit the NBT manually
 		Valid tags consist of feature keys which are living_entity scriptable.
 		The following features are set taggable by default:
 		can_breathe_water, no_wandering_trader, no_phantoms, scares_creepers,

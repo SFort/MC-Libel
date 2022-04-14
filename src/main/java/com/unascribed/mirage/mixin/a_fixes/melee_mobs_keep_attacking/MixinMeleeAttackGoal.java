@@ -22,7 +22,7 @@ public abstract class MixinMeleeAttackGoal {
 	@Shadow
 	public abstract void startExecuting();
 
-	@ModifyReturn(target="Lnet/minecraft/entity/ai/pathing/EntityNavigation;isIdle()Z", method="shouldContinue()Z")
+	@ModifyReturn(target="Lnet/minecraft/pathfinding/PathNavigate;noPath()Z", method="shouldContinueExecuting()Z")
 	public boolean fabrication$keepAttacking(boolean old) {
 		if (!FabConf.isEnabled("*.melee_mobs_keep_attacking")) return old;
 		if (old && this.attacker.getAttackTarget() != null && this.attacker.getDistance(this.attacker.getAttackTarget()) < 10) {
