@@ -19,19 +19,6 @@ balance.extra.anvil_damage_only_on_fall:
 	desc:
 		Anvils only take damage when falling from a height rather than randomly after being used.
 
-balance.extra.player_free_spawners:
-	name: Player Free Spawners
-	since: 1.3.0
-	sides: server_only
-	default: burnt
-	desc:
-		Mob spawners don't require a player nearby to spawn. This can be dangerous on a normal world
-		as it means all loaded spawners will constantly spawn mobs, which makes dungeons pre-loaded
-		monsterboxes and floods abandoned mineshafts with cave spiders. Use carefully, preferably in
-		worlds with structures disabled.
-		
-		See Balance > Spawners Always Tick for a less extreme, safer version of this.
-		
 balance.extra.food_always_edible:
 	name: Food Always Edible
 	since: 1.3.0
