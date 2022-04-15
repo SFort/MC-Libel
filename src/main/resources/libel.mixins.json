@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.unascribed.libel.mixin",
+  "plugin": "com.unascribed.libel.support.MixinConfigPlugin",
+  "refmap": "libel.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "injectors": {
+	"defaultRequire": 1
+  },
+  "overwrites": {
+	"conformVisibility": true
+  }
+}

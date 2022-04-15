@@ -1,0 +1,36 @@
+com.unascribed.libel.mixin.g_weird_tweaks.use_items_while_riding.MixinMinecraftClient
+rightClickMouse()V func_147121_ag()V	clickMouse()V func_147116_af()V
+Lnet/minecraft/client/entity/EntityPlayerSP;isRowingBoat()Z Lnet/minecraft/client/entity/EntityPlayerSP;func_184838_M()Z
+com.unascribed.libel.mixin.z_combined.old_armor.MixinLivingEntity
+onUpdate()V func_70071_h_()V
+Lnet/minecraft/item/ItemStack;getAttributeModifiers(Lnet/minecraft/inventory/EntityEquipmentSlot;)Lcom/google/common/collect/Multimap; Lnet/minecraft/item/ItemStack;func_111283_C(Lnet/minecraft/inventory/EntityEquipmentSlot;)Lcom/google/common/collect/Multimap;
+com.unascribed.libel.mixin.a_fixes.open_inventories_in_nether_portal.MixinClientPlayerEntity
+onLivingUpdate()V func_70636_d()V
+Lnet/minecraft/client/gui/GuiScreen;doesGuiPauseGame()Z Lnet/minecraft/client/gui/GuiScreen;func_73868_f()Z
+com.unascribed.libel.mixin.f_balance.disable_mending.MixinExperienceOrbEntity
+onCollideWithPlayer(Lnet/minecraft/entity/player/EntityPlayer;)V func_70100_b_(Lnet/minecraft/entity/player/EntityPlayer;)V
+Lnet/minecraft/item/ItemStack;isItemDamaged()Z net/minecraft/item/ItemStack;func_77951_h()Z
+com.unascribed.libel.mixin.d_minor_mechanics.mechanism_muffling.MixinDispenserBlock
+dispense(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V func_176439_d(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V
+Lnet/minecraft/world/World;playEvent(ILnet/minecraft/util/math/BlockPos;I)V net/minecraft/world/World;func_180498_a(ILnet/minecraft/util/math/BlockPos;I)V
+com.unascribed.libel.mixin.c_tweaks.less_restrictive_note_blocks.MixinNoteBlock
+triggerNote(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V func_175108_a(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V
+Lnet/minecraft/block/state/IBlockState;getMaterial()Lnet/minecraft/block/material/Material; Lnet/minecraft/block/state/IBlockState;func_185904_a()Lnet/minecraft/block/material/Material;
+com.unascribed.libel.mixin.d_minor_mechanics.mechanism_muffling.MixinPistonBlock
+eventReceived(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;II)Z net/minecraft/block/BlockPistonBase;func_189539_a(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;II)Z
+Lnet/minecraft/world/World;playSound(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/SoundEvent;Lnet/minecraft/util/SoundCategory;FF)V net/minecraft/world/World;func_184134_a(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/SoundEvent;Lnet/minecraft/util/SoundCategory;FF)V
+com.unascribed.libel.mixin.g_weird_tweaks.flimsy_tripwire.MixinTripwireBlock
+updateTick(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;Ljava/util/Random;)V func_180650_b(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;Ljava/util/Random;)V
+Lnet/minecraft/block/BlockTripWire;updateState(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V net/minecraft/block/BlockTripWire;func_176288_d(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V
+com.unascribed.libel.mixin.c_tweaks.no_hunger.MixinPlayerEntity
+onItemUseFinish(Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/EntityLivingBase;)Lnet/minecraft/item/ItemStack; func_77654_b(Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/EntityLivingBase;)Lnet/minecraft/item/ItemStack;
+Lnet/minecraft/util/FoodStats;addStats(Lnet/minecraft/item/ItemFood;Lnet/minecraft/item/ItemStack;)V net/minecraft/util/FoodStats;func_151686_a(Lnet/minecraft/item/ItemFood;Lnet/minecraft/item/ItemStack;)V
+com.unascribed.libel.mixin.a_fixes.melee_mobs_keep_attacking.MixinMeleeAttackGoal
+shouldContinueExecuting()Z func_75253_b()Z
+Lnet/minecraft/pathfinding/PathNavigate;noPath()Z net/minecraft/pathfinding/PathNavigate;func_75500_f()Z
+com.unascribed.libel.mixin.b_utility.item_despawn.MixinPlayerInventory
+dropAllItems()V func_70436_m()V
+Lnet/minecraft/entity/player/EntityPlayer;dropItem(Lnet/minecraft/item/ItemStack;ZZ)Lnet/minecraft/entity/item/EntityItem; net/minecraft/entity/player/EntityPlayer;func_71019_a(Lnet/minecraft/item/ItemStack;ZZ)Lnet/minecraft/entity/item/EntityItem;
+com.unascribed.libel.mixin.z_combined.see_items_while_riding.MixinHeldItemRenderer
+updateEquippedItem()V func_78441_a()V
+Lnet/minecraft/client/entity/EntityPlayerSP;isRowingBoat()Z net/minecraft/client/entity/EntityPlayerSP;func_184838_M()Z

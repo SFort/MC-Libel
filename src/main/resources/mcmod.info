@@ -1,8 +1,8 @@
 [
 {
-  "modid": "mirage",
-  "name": "Mirage",
-  "description": "A huge collection of vanilla tweaks and small features..",
+  "modid": "libel",
+  "name": "Libel",
+  "description": "A collection of vanilla tweaks and small features..",
   "version": "3.0",
   "mcversion": "${mcversion}",
   "url": "https://unascribed.com/fabrication",

@@ -41,7 +41,7 @@ repositories {
 }
 
 mixin {
-	add sourceSets.main, "mirage.refmap.json"
+	add sourceSets.main, "libel.refmap.json"
 }
 
 minecraft {
@@ -52,12 +52,12 @@ minecraft {
 			workingDirectory project.file('run')
 			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 			property 'forge.logging.console.level', 'debug'
-			property 'fml.coreMods.load', 'com.unascribed.mirage.MirageCoreMod'
+			property 'fml.coreMods.load', 'com.unascribed.libel.MirageCoreMod'
 		}
 		server {
 			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 			property 'forge.logging.console.level', 'debug'
-			property 'fml.coreMods.load', 'com.unascribed.mirage.MirageCoreMod'
+			property 'fml.coreMods.load', 'com.unascribed.libel.MirageCoreMod'
 		}
 	}
 
@@ -85,18 +85,16 @@ tasks.withType(JavaCompile) {
 jar {
 	manifest {
 		attributes([
-				"FMLCorePlugin": "com.unascribed.mirage.MirageCoreMod",
+				"FMLCorePlugin": "com.unascribed.libel.MirageCoreMod",
 				"FMLCorePluginContainsFMLMod": "false",
 				"ForceLoadAsMod": "true",
 				"TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
 				"TweakOrder": "0",
-				"Specification-Title": "mirage",
+				"Specification-Title": "libel",
 				"Specification-Version": "1",
 				"Implementation-Title": project.name,
 				"Implementation-Version": "${version}",
-				"MixinConnector": "com.unascribed.mirage.MirageMixinConnector",
-				"MixinConfigs": "mirage.refmap.json"
-
+				"MixinConfigs": "libel.refmap.json"
 		])
 	}
 
@@ -111,7 +109,9 @@ jar {
 		})
 		file('build/tmp/classes.txt').text = bldr.toString();
 	}
-
+	// FabRefMap.txt is was manually written using
+	// ~/.gradle/caches/minecraft/de/oceanlabs/mcp/mcp_snapshot/20170804/1.12.2/srgs/mcp-srg.srg
+	from "fabRefMap.txt"
 	from "LICENSE"
 	from "build/tmp/classes.txt"
 }

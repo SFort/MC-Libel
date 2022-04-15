@@ -4,3 +4,11 @@ tweaks.ender_pearl_sound:
 	sides: server_only
 	desc:
 		Ender pearls play enderman teleport sound when breaking.
+
+
+utility.lapis_reserve:
+	name: Lapis Reserve
+	since: 2.3.1
+	sides: server_only
+	desc:
+		Enchanting table lapis slot acts as an ender chest.

@@ -53,15 +53,6 @@ tweaks.shulker_bullets_despawn_on_death:
 	desc:
 		Makes shulker bullets despawn when the shulker that shot them is killed.
 
-tweaks.arrows_work_in_water:
-	name: Arrows Work In Water
-	since: 1.0
-	sides: server_only
-	media: https://unascribed.com/fabrication/arrows_work_in_water.mp4
-	desc:
-		Reduces arrow drag in water by a fair bit to make bows useful underwater. Not nearly as
-		good as a trident, but usable.
-
 tweaks.rainbow_experience:
 	name: Rainbow Experience
 	since: 1.2.1
