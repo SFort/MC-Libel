@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MixinGlassBottleItem {
 
 	@Inject(at=@At(value="FIELD", target="Lnet/minecraft/init/Items;POTIONITEM:Lnet/minecraft/item/ItemPotion;"), method="onItemRightClick(Lnet/minecraft/world/World;Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/util/EnumHand;)Lnet/minecraft/util/ActionResult;")
-	private static void fabrication$readState(World worldIn, EntityPlayer player, EnumHand handIn, CallbackInfoReturnable<ActionResult<ItemStack>> cir) {
+	public void fabrication$readState(World worldIn, EntityPlayer player, EnumHand handIn, CallbackInfoReturnable<ActionResult<ItemStack>> cir) {
 		if (FabConf.isEnabled("*.bottled_air") && player.isInWater()) {
 			if (player.getAir() < 300) {
 				player.setAir(Math.min(300, player.getAir()+30));

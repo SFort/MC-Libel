@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public abstract class MixinPlayerEntity {
 
 	@Hijack(method="onItemUseFinish(Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Lnet/minecraft/entity/EntityLivingBase;)Lnet/minecraft/item/ItemStack;", target="Lnet/minecraft/util/FoodStats;addStats(Lnet/minecraft/item/ItemFood;Lnet/minecraft/item/ItemStack;)V")
-	private static boolean eatFood(FoodStats stats, ItemFood food, ItemStack stack, ItemStack stack2, World world, EntityLivingBase entity) {
+	private static boolean eatFood(FoodStats stats, ItemFood food, ItemStack stack, Object self, ItemStack stack2, World world, EntityLivingBase entity) {
 		if (FabConf.isEnabled("*.no_hunger") && entity instanceof EntityPlayer) {
 			if (ConfigPredicates.shouldRun("*.no_hunger", (EntityPlayer)entity)) {
 				entity.heal((food.getHealAmount(stack)+food.getSaturationModifier(stack))*0.75f);

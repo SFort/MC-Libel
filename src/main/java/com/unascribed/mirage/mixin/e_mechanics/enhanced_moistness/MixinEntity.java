@@ -47,7 +47,7 @@ public abstract class MixinEntity implements MarkWet {
 
 	@Inject(at=@At("TAIL"), method="onEntityUpdate()V")
 	public void baseTick(CallbackInfo ci) {
-		if (!FabConf.isEnabled("*.enhanced_moistness") || world.isRemote) return;
+		if (!FabConf.isEnabled("*.enhanced_moistness") || world == null || world.isRemote) return;
 		if (isInLava()) {
 			fabrication$wetTimer = 0;
 		} else {
@@ -61,6 +61,7 @@ public abstract class MixinEntity implements MarkWet {
 					if (self instanceof EntityLivingBase) {
 						if (fabrication$wetTimer%4 == 0) {
 							AxisAlignedBB box = getCollisionBoundingBox();
+							if (box == null) return;
 							world.spawnParticle(EnumParticleTypes.DRIP_WATER, posX, posY+((box.maxY - box.minY)/2), posZ, (box.maxX - box.minX)/3, (box.maxY - box.minY)/4, (box.maxZ - box.minZ)/3);
 						}
 					}

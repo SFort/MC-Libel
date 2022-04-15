@@ -10,28 +10,12 @@ woina:
 	desc:
 		Forward ports of forgotten tidbits.
 
-woina.old_lava:
-	name: Old Lava
-	since: 1.2.4
-	sides: client_only
-	media: https://unascribed.com/fabrication/old_lava.mp4
-	desc:
-		Resurrects the old procedural lava texture from 1.4. Replace your molten cheese with pasta
-		sauce today! HAYO!
-
 woina.dropped_items_dont_stack:
 	name: Dropped Items Don't Stack
 	since: 1.4.0
 	sides: server_only
 	desc:
 		When dropping items of the same type they don't merge into a bigger stack.
-
-woina.yellow_button_hover:
-	name: Yellow Button Hover
-	since: 2.1.0
-	sides: client_only
-	desc:
-		Hovered buttons will have yellow text.
 
 # kate: space-indent off
 # vim: noai:noet

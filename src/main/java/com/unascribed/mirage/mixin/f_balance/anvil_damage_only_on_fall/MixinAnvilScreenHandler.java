@@ -6,7 +6,7 @@ import com.unascribed.mirage.support.SpecialEligibility;
 import com.unascribed.mirage.support.injection.ModifyReturn;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(targets="Lnet/minecraft/inventory/ContainerRepair$2")
+@Mixin(targets="net.minecraft.inventory.ContainerRepair$2")
 @EligibleIf(configAvailable="*.anvil_damage_only_on_fall")
 public class MixinAnvilScreenHandler {
 

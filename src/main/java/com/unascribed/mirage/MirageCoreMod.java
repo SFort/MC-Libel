@@ -1,7 +1,5 @@
 package com.unascribed.mirage;
 
-import net.minecraftforge.fml.client.FMLConfigGuiFactory;
-import net.minecraftforge.fml.relauncher.FMLCorePlugin;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;

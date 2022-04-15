@@ -62,14 +62,6 @@ tweaks.arrows_work_in_water:
 		Reduces arrow drag in water by a fair bit to make bows useful underwater. Not nearly as
 		good as a trident, but usable.
 
-tweaks.reverse_note_block_tuning:
-	name: Reverse Note Block Tuning
-	since: 1.0
-	sides: server_only
-	media: https://unascribed.com/fabrication/reverse_note_block_tuning.mp4
-	desc:
-		Sneaking while tuning a note block reduces its pitch rather than increases.
-
 tweaks.rainbow_experience:
 	name: Rainbow Experience
 	since: 1.2.1

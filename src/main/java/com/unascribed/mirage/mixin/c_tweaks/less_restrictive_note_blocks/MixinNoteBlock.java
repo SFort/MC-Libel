@@ -11,14 +11,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TileEntityNote.class)
 @EligibleIf(configAvailable="*.less_restrictive_note_blocks")
 public abstract class MixinNoteBlock extends TileEntity {
 
 	@ModifyReturn(method="triggerNote(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V", target="Lnet/minecraft/block/state/IBlockState;getMaterial()Lnet/minecraft/block/material/Material;")
-	private Material fabrication$sidesAreValid(Material old,  World world, BlockPos pos, CallbackInfo ci) {
+	private static Material fabrication$sidesAreValid(Material old, IBlockState state, Object self,  World world, BlockPos pos) {
 		if (!FabConf.isEnabled("*.less_restrictive_note_blocks")) return old;
 		EnumFacing[] directions = {
 				EnumFacing.UP,

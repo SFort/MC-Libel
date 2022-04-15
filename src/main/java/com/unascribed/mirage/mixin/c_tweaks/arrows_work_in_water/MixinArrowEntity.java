@@ -16,7 +16,7 @@ public abstract class MixinArrowEntity extends Entity {
 		super(worldIn);
 	}
 
-	@ModifyReturn(method="onUpdate()V", target="Lnet/minecraft/entity/projectile/EntityArrow;isInWater()Z")
+	@ModifyReturn(method="onUpdate()V", target="Lnet/minecraft/entity/Entity;isInWater()Z")
 	private static float fabrication$ignoreWater(float old) {
 		return FabConf.isEnabled("*.arrows_work_in_water") ? 0.85f : old;
 	}

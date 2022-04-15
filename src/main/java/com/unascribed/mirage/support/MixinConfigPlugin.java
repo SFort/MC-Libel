@@ -294,31 +294,6 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
 	public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
 		if (FabConf.limitRuntimeConfigs()) finalizeIsEnabled(targetClass);
 		FabInjector.apply(targetClass);
-		if(Agnos.isModLoaded("lithium") && "com.unascribed.mirage.mixin.e_mechanics.colorful_redstone.MixinRedstoneWireBlock".equals(mixinClassName)) {
-			targetClass.methods.forEach(methodNode -> {
-				if (methodNode instanceof MethodNodeEx && "getReceivedPowerFaster".equals(((MethodNodeEx) methodNode).getOriginalName())){
-					methodNode.visibleAnnotations.forEach(annotationNode -> {
-						if (!"Lorg/spongepowered/asm/mixin/transformer/meta/MixinMerged;".equals(annotationNode.desc)) return;
-						for (int i=0; i<annotationNode.values.size(); i++){
-							if ("mixin".equals(annotationNode.values.get(i))){
-								i++;
-								if (i<annotationNode.values.size() && "me.jellysquid.mods.lithium.mixin.block.redstone_wire.RedstoneWireBlockMixin".equals(annotationNode.values.get(i))){
-									LabelNode label = new LabelNode(new Label());
-									InsnList earlyRet = new InsnList();
-									earlyRet.add(new LdcInsnNode("*.colorful_redstone"));
-									earlyRet.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "com/unascribed/mirage/FabConf", "isEnabled", "(Ljava/lang/String;)Z", false));
-									earlyRet.add(new JumpInsnNode(Opcodes.IFEQ, label));
-									earlyRet.add(new InsnNode(Opcodes.RETURN));
-									earlyRet.add(label);
-									methodNode.instructions.insert(earlyRet);
-								}
-								break;
-							}
-						}
-					});
-				}
-			});
-		}
 	}
 
 	public static void finalizeIsEnabled(ClassNode targetClass){

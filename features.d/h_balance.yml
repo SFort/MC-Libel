@@ -36,18 +36,6 @@ balance.hyperspeed_furnace_minecart:
 		Warning: These carts are so fast that they sometimes fall off of track corners. Make sure to
 		surround track corners with blocks.
 
-balance.bedrock_impaling:
-	name: Bedrock-Like Impaling
-	since: 1.0
-	sides: server_only
-	media: https://unascribed.com/fabrication/bedrock_impaling.mp4
-	desc:
-		Makes the Impaling enchantment act like it does in Bedrock Edition and Combat Test 4.
-		Namely, it deals bonus damage to anything that is in water or rain (i.e. is wet), instead
-		of only aquatic mobs.
-		
-		Interacts with Enhanced Moistness.
-
 balance.environmentally_friendly_creepers:
 	name: Environmentally Friendly Creepers
 	since: 1.0
@@ -55,14 +43,6 @@ balance.environmentally_friendly_creepers:
 	media: https://unascribed.com/fabrication/environmentally_friendly_creepers.mp4
 	desc:
 		Creeper explosions deal entity damage, but not block damage, even if mobGriefing is true.
-
-balance.drop_more_exp_on_death:
-	name: Drop More Experience On Death
-	since: 1.2.1
-	sides: server_only
-	media: https://unascribed.com/fabrication/drop_more_exp_on_death.mp4
-	desc:
-		Players drop 80% of their experience when dying instead of basically nothing.
 
 balance.anvil_rename_always_costs_one:
 	name: Anvil Rename Always Costs One

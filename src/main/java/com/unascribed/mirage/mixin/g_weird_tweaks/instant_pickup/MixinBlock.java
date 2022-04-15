@@ -21,9 +21,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinBlock {
 
 	@Inject(at=@At("TAIL"), method="harvestBlock(Lnet/minecraft/world/World;Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/tileentity/TileEntity;Lnet/minecraft/item/ItemStack;)V")
-	private static void dropStacks(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack, CallbackInfo ci) {
+	public void dropStacks(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack, CallbackInfo ci) {
 		if (FabConf.isEnabled("*.instant_pickup") && player instanceof EntityPlayer) {
-			InstantPickup.slurp(world, new AxisAlignedBB(pos).expand(0.25, 0.25, 0.25), (EntityPlayer)player);
+			InstantPickup.slurp(world, new AxisAlignedBB(pos).expand(0.25, 0.25, 0.25), player);
 		}
 	}
 

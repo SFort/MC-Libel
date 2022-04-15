@@ -1,19 +1,20 @@
 package com.unascribed.mirage.mixin.e_mechanics.swap_conflicting_enchants;
 
+import com.mojang.realmsclient.util.Pair;
 import com.unascribed.mirage.FabConf;
 import com.unascribed.mirage.support.EligibleIf;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Hand;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Pair;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,59 +32,59 @@ import java.util.stream.Collectors;
 public abstract class MixinItemStack {
 
 	@Shadow
-	public abstract boolean hasEnchantments();
-
-	@Shadow
 	public abstract void addEnchantment(Enchantment enchantment, int level);
 
 	@Shadow
-	private NbtCompound nbt;
+	private NBTTagCompound capNBT;
 
-	@Inject(method="use(Lnet/minecraft/world/World;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/TypedActionResult;", at=@At("HEAD"), cancellable=true)
-	public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
+	@Shadow
+	public abstract boolean isItemEnchanted();
+
+	@Inject(method="onItemUse(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/EnumHand;Lnet/minecraft/util/EnumFacing;FFF)Lnet/minecraft/util/EnumActionResult;", at=@At("HEAD"), cancellable=true)
+	public void use(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ, CallbackInfoReturnable<EnumActionResult> cir) {
 		if (!FabConf.isEnabled("*.swap_conflicting_enchants")) return;
 		List<Pair<String, Integer>> currentConflicts = new ArrayList<>();
-		NbtCompound lTag = nbt.getCompound("fabrication#conflictingEnchants");
-		if (lTag != null && !lTag.isEmpty()) {
-			for (String key : lTag.getKeys()) {
-				currentConflicts.add(new Pair<>(key, lTag.getInt(key)));
+		NBTTagCompound lTag = capNBT.getCompoundTag("fabrication#conflictingEnchants");
+		if (!lTag.hasNoTags()) {
+			for (String key : lTag.getKeySet()) {
+				currentConflicts.add(Pair.of(key, lTag.getInteger(key)));
 			}
 		}
-		if (!currentConflicts.isEmpty() && user.isSneaky()) {
-			NbtCompound tag = new NbtCompound();
+		if (!currentConflicts.isEmpty() && player.isSneaking()) {
+			NBTTagCompound tag = new NBTTagCompound();
 			Pair<String, Integer> toAdd;
 			{
-				int rmi = world.random.nextInt(currentConflicts.size());
+				int rmi = world.rand.nextInt(currentConflicts.size());
 				toAdd = currentConflicts.get(rmi);
 				currentConflicts.remove(rmi);
 			}
-			Enchantment toAddEnchant = Registry.ENCHANTMENT.get(new ResourceLocation(toAdd.getLeft()));
+			Enchantment toAddEnchant = Enchantment.REGISTRY.getObject(new ResourceLocation(toAdd.first()));
 			Map<Enchantment, Integer> currentEnchantments = null;
-			if (this.hasEnchantments()) {
-				currentEnchantments = EnchantmentHelper.get((ItemStack)(Object)this)
+			if (this.isItemEnchanted()) {
+				currentEnchantments = EnchantmentHelper.getEnchantments((ItemStack)(Object)this)
 						.entrySet().stream().filter(entry -> {
-							if (!entry.getKey().canCombine(toAddEnchant)) {
-								tag.putInt(String.valueOf(Registry.ENCHANTMENT.getId(entry.getKey())), entry.getValue());
+							if (!entry.getKey().isCompatibleWith(toAddEnchant)) {
+								tag.setInteger(String.valueOf(Enchantment.REGISTRY.getNameForObject(entry.getKey())), entry.getValue());
 								return false;
 							}
 							return true;
 						}).collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue));
-				EnchantmentHelper.set(currentEnchantments, (ItemStack)(Object)this);
+				EnchantmentHelper.setEnchantments(currentEnchantments, (ItemStack)(Object)this);
 			}
 			for (Pair<String, Integer> entry : currentConflicts) {
-				Enchantment enchant = Registry.ENCHANTMENT.get(new ResourceLocation(entry.getLeft()));
-				if (currentEnchantments != null && currentEnchantments.keySet().stream().anyMatch(e->!e.canCombine(enchant))) {
-					tag.putInt(entry.getLeft(), entry.getRight());
+				Enchantment enchant = Enchantment.REGISTRY.getObject(new ResourceLocation(entry.first()));
+				if (currentEnchantments != null && currentEnchantments.keySet().stream().anyMatch(e->!e.isCompatibleWith(enchant))) {
+					tag.setInteger(entry.first(), entry.second());
 				} else {
-					addEnchantment(enchant, entry.getRight());
+					addEnchantment(enchant, entry.second());
 				}
 			}
-			if (!tag.isEmpty()) {
-				nbt.put("fabrication#conflictingEnchants", tag);
+			if (!tag.hasNoTags()) {
+				capNBT.setTag("fabrication#conflictingEnchants", tag);
 			}
-			addEnchantment(toAddEnchant, toAdd.getRight());
-			world.playSound(null, user.getBlockPos(), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.PLAYERS, 1, 1);
-			cir.setReturnValue(TypedActionResult.consume((ItemStack)(Object)this));
+			addEnchantment(toAddEnchant, toAdd.second());
+			world.playSound(null, player.getPosition(), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.PLAYERS, 1, 1);
+			cir.setReturnValue(EnumActionResult.SUCCESS);
 		}
 	}
 

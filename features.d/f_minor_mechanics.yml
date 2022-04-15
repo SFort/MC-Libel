@@ -67,26 +67,6 @@ minor_mechanics.fire_protection_on_any_item:
 		Fire Protection can be applied to any enchantable item, and makes the item immune to fire
 		and lava damage.
 
-minor_mechanics.exact_note_block_tuning:
-	name: Exact Note Block Tuning
-	since: 1.0
-	sides: server_only
-	media: https://unascribed.com/fabrication/exact_note_block_tuning.mp4
-	desc:
-		Right-clicking a note block with a stack of sticks sets its pitch to the
-		size of the stack minus one.
-
-minor_mechanics.note_block_notes:
-	name: Note Block Notes
-	since: 1.0
-	sides: server_only
-	media: https://unascribed.com/fabrication/note_block_notes.mp4
-	desc:
-		Tells you the note the note block has been tuned to when tuning it or playing it manually
-		above your hotbar. Also shows the octave, and shows the correct note for the snare and click
-		instruments. (The bass drum is hard to nail down and so does not show note or octave info;
-		if you know the best way to describe the bass drum, please let me know in an issue.)
-
 minor_mechanics.spiders_cant_climb_glazed_terracotta:
 	name: Spiders Can't Climb Glazed Terracotta
 	since: 1.0.2
@@ -111,22 +91,6 @@ minor_mechanics.water_fills_on_break:
 		north, east, south, west, and top faces than there is air on its north, east, south, and
 		west faces. In case of a tie, air wins. Makes terraforming lakes and building canals, etc
 		much less frustrating.
-
-minor_mechanics.invisibility_splash_on_inanimates:
-	name: Invisibility Splash On Inanimates
-	since: 1.1.1
-	sides: server_only
-	media: https://unascribed.com/fabrication/invisibility_splash_on_inanimates.mp4
-	desc:
-		Invisibility splash potions affect inanimates (minecarts, arrows, etc) making them
-		invisible. They will become visible again if they become wet. This enables the vanilla
-		"invisible" flag, which doesn't work on inanimates unless Fixes > Inanimates Can Be
-		Invisible is also enabled.
-		
-		Logic: Invisibility potions coat the outer surface of the object. Living entities absorb and
-		eventually eliminate the compound, and when drank it exudes from the pores, but inanimate
-		objects do not have metabolisms, so the invisibility hangs around indefinitely unless washed
-		off. Don't @ me about skeletons.
 
 minor_mechanics.fire_aspect_is_flint_and_steel:
 	name: Fire Aspect Is Flint And Steel
@@ -175,14 +139,6 @@ minor_mechanics.protection_on_any_item:
 
 		It will inclusively protect from:.
 		Level 1: cactus, Level 2: fire, Level 3: lava, Level 4: explosions.
-
-minor_mechanics.spreadable_moss:
-	name: Spreadable Moss
-	since: 2.3.1
-	sides: server_only
-	desc:
-		Using bone meal on a stone block with a moss block nearby grows moss to that block, to make
-		it a bit easier to work with for building.
 
 # kate: space-indent off
 # vim: noai:noet

@@ -3,41 +3,42 @@ package com.unascribed.mirage.mixin.f_balance.pickup_skeleton_arrows;
 import com.unascribed.mirage.FabConf;
 import com.unascribed.mirage.interfaces.TagStrayArrow;
 import com.unascribed.mirage.support.EligibleIf;
-import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.entity.projectile.EntityTippedArrow;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ArrowEntity.class)
+@Mixin(EntityTippedArrow.class)
 @EligibleIf(configAvailable="*.pickup_skeleton_arrows")
 public abstract class MixinArrowEntity implements TagStrayArrow {
 
 	boolean fabrication$firedByStray = false;
 
-	@Inject(at=@At("RETURN"), method="asItemStack()Lnet/minecraft/item/ItemStack;")
+	@Inject(at=@At("RETURN"), method="getArrowStack()Lnet/minecraft/item/ItemStack;")
 	protected void asItemStack(CallbackInfoReturnable<ItemStack> cir) {
 		if (!(FabConf.isEnabled("*.pickup_skeleton_arrows") && fabrication$firedByStray)) return;
 		ItemStack arrow = cir.getReturnValue();
-		if (!arrow.hasCustomName())
-			arrow.setCustomName(new TranslatableText("item.minecraft.tipped_arrow.effect.slowness"));
-		if (!(arrow.hasNbt() && arrow.getNbt().contains("CustomPotionColor")))
-			arrow.getOrCreateNbt().putInt("CustomPotionColor", PotionUtil.getColor(Potions.SLOWNESS));
+		if (!arrow.hasDisplayName())
+			arrow.setStackDisplayName("Strays Arrow");
+		if (!(arrow.hasTagCompound() && arrow.getTagCompound().hasKey("CustomPotionColor"))){
+			if (arrow.getTagCompound() == null) arrow.setTagCompound(new NBTTagCompound());
+			arrow.getTagCompound().setInteger("CustomPotionColor", PotionUtils.getPotionColor(PotionTypes.SLOWNESS));
+		}
 	}
 
-	@Inject(at=@At("HEAD"), method="writeCustomDataToNbt(Lnet/minecraft/nbt/NbtCompound;)V")
-	public void writeCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) {
-		nbt.putBoolean("fabrication$firedByStray", fabrication$firedByStray);
+	@Inject(at=@At("HEAD"), method="writeEntityToNBT")
+	public void writeCustomDataToNbt(NBTTagCompound nbt, CallbackInfo ci) {
+		nbt.setBoolean("fabrication$firedByStray", fabrication$firedByStray);
 	}
 
-	@Inject(at=@At("HEAD"), method="readCustomDataFromNbt(Lnet/minecraft/nbt/NbtCompound;)V")
-	public void readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
+	@Inject(at=@At("HEAD"), method="readEntityFromNBT")
+	public void readCustomDataFromNbt(NBTTagCompound nbt, CallbackInfo ci) {
 		fabrication$firedByStray = nbt.getBoolean("fabrication$firedByStray");
 	}
 
